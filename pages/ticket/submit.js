@@ -1,9 +1,11 @@
 import React, {useState} from "react";
 import { Form, Field } from 'react-final-form'
+import { useRouter } from 'next/router'
 
 import {gql, useMutation } from '@apollo/client'
 
 import Modal from "../../components/Modal";
+
 
 // Define mutation
 const INCREMENT_COUNTER = gql`
@@ -30,9 +32,16 @@ const INCREMENT_COUNTER = gql`
 
 
 const SubmitTicketPage = (props) => {
+    const router = useRouter()
+
+    const dept = router.query.dept
+
     const [mutateFunction, { data, loading, error }] = useMutation(INCREMENT_COUNTER);
 
     const [showModal, setShowModal] = useState(false)
+
+    const handleClose = () => setShowModal(false);
+    const handleShow = () => setShowModal(true);
 
     const keys = Object.keys(props)
 
@@ -46,6 +55,7 @@ const SubmitTicketPage = (props) => {
                <div className="py-4 px-6">
                    <h1 className="text-display text-2xl"
                    >Submit a new Ticket</h1>
+                   {dept? <p>You are submiting a ticket for the {dept} department</p> : null}
                    <p>What is the issue you are having? We are here to help! 🤓 </p>
                </div>
                <div className="flex flex-col flex-wrap p-2">
@@ -86,18 +96,13 @@ const SubmitTicketPage = (props) => {
                    </div>
                    <div className="buttons flex flex-col flex-wrap p-6">
                         <button type="submit"
-                            onClick={onSubmit}
+                            onClick={handleShow}
                             className="text-center p-2 bg-blue-700 hover:bg-blue-400 rounded-md text-white"
                         >
                         Submit
                         </button>
                     </div>
                </div>
-               {/* Show Modal */}
-               {showModal ? (
-                   <Modal />
-               )
-               : null}
            </div>
     )
 }

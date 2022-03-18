@@ -19,7 +19,7 @@ const NavBar = () => {
                         <Link href="/">   
                         <a href="#" className="text-lg font-semibold tracking-widest text-primary-900 uppercase 
                         rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">
-                           Blend Supply
+                           Blend Supply✈️
                         </a>
                         </Link>
                             <button className="rounded-lg md:hidden focus:outline-none focus:shadow-outline">

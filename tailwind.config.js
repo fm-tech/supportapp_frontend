@@ -26,5 +26,11 @@ module.exports = {
       primary: ["Open Sans"]
     }
   },
-  plugins: [],
+  plugins: [
+    require('daisyui'),
+  ],
+  // daisyUI config (optional)
+  daisyui: {
+    themes: [ "corporate" ],
+  },
 }

@@ -12,13 +12,12 @@ const Table = (props) => {
     ]
 
     return (
-        <div className="bg-white shadow-md rounded my-6">
-            <table className="text-left w-full border-collapse">
+        <div className="overflow-x-auto">
+            <table className="table w-full">
                 <thead>
                     <tr>
                         {ticketLayout.map((subhead) => {
                             return <th 
-                            className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light"
                             key={subhead}>
                                 {subhead}
                             </th>

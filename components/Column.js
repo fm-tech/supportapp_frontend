@@ -5,8 +5,6 @@ import dayjs from "dayjs";
 const Column = (props) => {
     const display = props.props
 
-    console.log()
-
     const getDisplay = () =>{
         if( typeof(display) === 'object'){
             if(display != null){
@@ -28,11 +26,12 @@ const Column = (props) => {
            
         }
        
-}
+    }
+
     let displayVal = getDisplay()
 
     return (
-                    <td className="py-4 px-6 border-b border-grey-light">
+                    <td>
                      {displayVal}
                     </td>
     )

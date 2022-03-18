@@ -7,6 +7,7 @@ import NavBar from '../components/NavBar'
 function MyApp({ Component, pageProps }) {
   return  <ApolloProvider client={client }>
       <section 
+      data-theme='corporate'
         className='min-w-fit min-h-screen bg-zinc-50  mx-auto'>
         <NavBar />
         <div id='page' className='p-8'>

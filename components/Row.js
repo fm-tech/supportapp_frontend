@@ -7,7 +7,7 @@ const Row = (props) => {
     const keys = Object.keys(props)
 
     return (
-                <tr className="hover:bg-grey-lighter">
+                <tr>
                     {keys.map((prop) => {
                          return <Column key={prop} props={props[prop]} />
                     })}
