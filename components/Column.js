@@ -17,7 +17,6 @@ const Column = (props) => {
         }
         else if( typeof(display) === 'string') {
             if(dayjs(display).isValid()){
-                // return 'This is a sting'
                 return dayjs(display).format("MM-DD-YYYY")
             }
             else {
@@ -31,7 +30,7 @@ const Column = (props) => {
     let displayVal = getDisplay()
 
     return (
-                    <td>
+                    <td className="hover:bg-primary-400 hover:font-bold cursor-pointer">
                      {displayVal}
                     </td>
     )

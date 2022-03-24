@@ -1,19 +1,17 @@
 import React, {useState} from "react";
-import { Form, Field } from 'react-final-form'
 import { useRouter } from 'next/router'
 
 import {gql, useMutation } from '@apollo/client'
 
 import Modal from "../../components/Modal";
 
-
 // Define mutation
-const INCREMENT_COUNTER = gql`
+const SUBMIT_TICKET = gql`
   # Increments a back-end counter and gets its resulting value
   mutation(
   $subject:String
   $post:JSON
-  $requestFrom: String
+  $requestFrom:String,
   ){
     createTicket(data:{
         subject: $subject
@@ -30,25 +28,35 @@ const INCREMENT_COUNTER = gql`
 }
 `
 
-
 const SubmitTicketPage = (props) => {
     const router = useRouter()
-
     const dept = router.query.dept
-
-    const [mutateFunction, { data, loading, error }] = useMutation(INCREMENT_COUNTER);
-
-    const [showModal, setShowModal] = useState(false)
-
-    const handleClose = () => setShowModal(false);
-    const handleShow = () => setShowModal(true);
-
-    const keys = Object.keys(props)
-
-    const onSubmit = () => {
-        console.log('Event triggered')
-        setShowModal(true)
+    const [subject, setSubject]     = useState('')
+    const [userEmail, setUserEmail] = useState('')
+    const [input, setInput]          = useState('')
+    const [submitTicket, { data, loading, error }] = useMutation(SUBMIT_TICKET,
+        {
+            variables: {
+                "subject": subject,
+                "post": [ {
+                          "type": "paragraph",
+                          "children": [
+                            {
+                              "text": input
+                            }
+                          ]
+                        }],
+                "requestFrom": userEmail
+            }
+        }
+        )
+    
+    const submit = (e) => {
+        e.preventDefault()
+        submitTicket()
+        router.push('/result')
     }
+
 
     return (
            <div className="bg-white shadow-md rounded my-6">
@@ -67,7 +75,10 @@ const SubmitTicketPage = (props) => {
                                 className="py-2 px-3 rounded-lg border-2 border-primary-300 
                                 mt-1 focus:outline-none focus:ring-2 focus:ring-primary-600 
                                 focus:border-transparent" 
-                                id="subject" type="text" autoFocus />
+                                id="subject" type="text" 
+                                value={subject}
+                                onChange={(e) => setSubject(e.target.value)}
+                                autoFocus />
                         </div>
                     
                    </div>
@@ -79,7 +90,10 @@ const SubmitTicketPage = (props) => {
                                 className="py-2 px-3 rounded-lg border-2 border-primary-300 
                                 mt-1 focus:outline-none focus:ring-2 focus:ring-primary-600 
                                 focus:border-transparent" 
-                                id="email" type="text" autoFocus />
+                                id="email" type="text" 
+                                value={userEmail}
+                                onChange={(e) => setUserEmail(e.target.value)}
+                                autoFocus />
                         </div>
                     
                    </div>
@@ -91,12 +105,15 @@ const SubmitTicketPage = (props) => {
                                 className="h-24 py-2 px-3 rounded-lg border-2 border-primary-300 
                                 mt-1 focus:outline-none focus:ring-2 focus:ring-primary-600 
                                 focus:border-transparent" 
-                                id="description" type="text" autoFocus />
+                                id="description" type="text" 
+                                value={input}
+                                onChange={(e) => setInput(e.target.value)}
+                                autoFocus />
                         </div>
                    </div>
                    <div className="buttons flex flex-col flex-wrap p-6">
                         <button type="submit"
-                            onClick={handleShow}
+                            onClick={submit}
                             className="text-center p-2 bg-blue-700 hover:bg-blue-400 rounded-md text-white"
                         >
                         Submit

@@ -32,6 +32,7 @@ const Table = (props) => {
                                 submitedOn={ticket.submitedOn}
                                 submittedBy={ticket.submittedBy}
                                 post={ticket.post}
+                                ticketId={ticket.id}
                             />
                         })
                     }

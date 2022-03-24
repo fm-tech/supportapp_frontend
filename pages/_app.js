@@ -3,6 +3,7 @@ import {ApolloProvider} from '@apollo/client'
 
 import client from '../utils/apollo-client'
 import NavBar from '../components/NavBar'
+import Footer from '../components/Footer'
 
 function MyApp({ Component, pageProps }) {
   return  <ApolloProvider client={client }>
@@ -13,6 +14,7 @@ function MyApp({ Component, pageProps }) {
         <div id='page' className='p-8'>
           <Component {...pageProps} />
         </div>
+        <Footer />
       </section>
     </ApolloProvider>
  
