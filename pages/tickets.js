@@ -2,7 +2,7 @@ import React from "react";
 
 import { gql, useQuery } from "@apollo/client";
 
-import Table from "../components/table";
+import Table from "../components/Table";
 
 const TICKETS_QUERY = gql`
 query{
