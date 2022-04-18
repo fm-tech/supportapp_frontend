@@ -16,6 +16,7 @@ query($id:ID){
         name
       }
     }
+    alias
     post{
       document
     }
@@ -46,7 +47,12 @@ const TicketPage = (props) => {
                       </div>
                       <div className="grow text-left">
                           <small>Submitted by 
-                              <span className=""> {data.ticket.submittedBy.name}</span> 
+                          <span className=""> 
+                              {data.ticket.submittedBy ? 
+                              data.ticket.submittedBy.name : 
+                              data.ticket.alias
+                              }
+                          </span> 
                           </small>
                           <br />
                           <small>

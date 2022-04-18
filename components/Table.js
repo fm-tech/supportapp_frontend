@@ -30,7 +30,7 @@ const Table = (props) => {
                             return <Row key={ticket.id}
                                 subject={ticket.subject}
                                 submitedOn={ticket.submitedOn}
-                                submittedBy={ticket.submittedBy}
+                                alias={ticket.alias}
                                 post={ticket.post}
                                 ticketId={ticket.id}
                             />

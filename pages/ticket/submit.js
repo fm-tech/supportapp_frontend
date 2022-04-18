@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { useRouter } from 'next/router'
+import dayjs from "dayjs";
 
 import {gql, useMutation } from '@apollo/client'
 
@@ -16,11 +17,7 @@ const SUBMIT_TICKET = gql`
     createTicket(data:{
         subject: $subject
         post: $post
-        submittedBy:{
-        connect: {
-            email: $requestFrom
-        }
-        }
+        alias: $requestFrom
     }){
         id,
         subject
@@ -34,6 +31,12 @@ const SubmitTicketPage = (props) => {
     const [subject, setSubject]     = useState('')
     const [userEmail, setUserEmail] = useState('')
     const [input, setInput]          = useState('')
+
+    const getDate = () =>  {
+        let today = new Date
+        return today.toISOString()
+    }
+
     const [submitTicket, { data, loading, error }] = useMutation(SUBMIT_TICKET,
         {
             variables: {
@@ -46,7 +49,7 @@ const SubmitTicketPage = (props) => {
                             }
                           ]
                         }],
-                "requestFrom": userEmail
+                "alias": userEmail,
             }
         }
         )
@@ -57,6 +60,8 @@ const SubmitTicketPage = (props) => {
         router.push('/result')
     }
 
+  
+
 
     return (
            <div className="bg-white shadow-md rounded my-6">
@@ -65,6 +70,7 @@ const SubmitTicketPage = (props) => {
                    >Submit a new Ticket</h1>
                    {dept? <p>You are submiting a ticket for the {dept} department</p> : null}
                    <p>What is the issue you are having? We are here to help! 🤓 </p>
+               { getDate() }
                </div>
                <div className="flex flex-col flex-wrap p-2">
                    <div className="grow">

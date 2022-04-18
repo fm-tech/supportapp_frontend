@@ -9,9 +9,7 @@ query{
   tickets{
   	id,
     submitedOn,
-    submittedBy{
-      name
-    },
+    alias,
     assignedTo{
       name
     },
@@ -26,7 +24,9 @@ query{
 
 export default function Tickets() {
 
-    const {data, loading, error} = useQuery(TICKETS_QUERY)
+    const {data, loading, error} = useQuery(TICKETS_QUERY, {
+      pollInterval: 4000
+    })
     // console.log(data)
     return (
         <section>   

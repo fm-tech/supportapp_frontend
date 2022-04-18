@@ -6,15 +6,15 @@ const Row = (props) => {
 
     // console.log(props)
     let id = props.ticketId   
-    const keys = Object.keys(props)
-    console
-    
+    let keys = Object.keys(props)
+    keys.pop()
+    keys.pop()
 
     return (
         <Link href={id ? `/ticket/${id}` : ''} passHref>
             <tr  >
                 {keys.map((prop) => {
-                if (prop != 'ticketId'){
+                if (prop != 'ticketId' || 'post'){
                     return <Column key={prop} props={props[prop]} />
                 }
                 })}
