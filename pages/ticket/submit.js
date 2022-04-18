@@ -20,6 +20,7 @@ const SUBMIT_TICKET = gql`
         alias: $requestFrom
     }){
         id,
+        alias
         subject
     }
 }
@@ -49,7 +50,7 @@ const SubmitTicketPage = (props) => {
                             }
                           ]
                         }],
-                "alias": userEmail,
+                "requestFrom": userEmail,
             }
         }
         )
